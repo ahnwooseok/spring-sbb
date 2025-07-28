@@ -21,9 +21,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // spring-boot-devtools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // lombok setting
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
+
+    // h2 database
+    runtimeOnly('com.h2database:h2')
 }
 
 tasks.named('test') {
