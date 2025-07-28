@@ -31,6 +31,9 @@ dependencies {
 
     // h2 database
     runtimeOnly('com.h2database:h2')
+
+    // jpa setting
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 }
 
 tasks.named('test') {
