@@ -17,10 +17,20 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    mockitoAgent {
+        transitive = false
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // mockito 관련 설정
+    testImplementation 'org.mockito:mockito-core:5.14.2'  // 사용 중인 버전으로 변경
+    mockitoAgent 'org.mockito:mockito-core:5.14.2'   // 에이전트용 딸림 라이브러리
 
     // spring-boot-devtools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -34,8 +44,18 @@ dependencies {
 
     // jpa setting
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    // JUnit setting
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(Test).configureEach {
+    // mockitoAgent jar를 javaagent로 지정
+    def agentJar = configurations.mockitoAgent.singleFile
+    jvmArgs("-javaagent:${agentJar}")
 }
