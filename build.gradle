@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.3-SNAPSHOT'
+version = '0.0.4-SNAPSHOT'
 
 java {
     toolchain {
@@ -66,6 +66,9 @@ dependencies {
 
     // markdown
     implementation('org.commonmark:commonmark:0.21.0')
+
+    // postgreSQL
+    implementation('org.postgresql:postgresql')
 }
 
 tasks.named('test') {
